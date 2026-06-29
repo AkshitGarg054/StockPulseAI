@@ -592,7 +592,7 @@ export default function App() {
             variants={containerVariants}
             initial="hidden"
             animate="show"
-            className="w-full space-y-3.5"
+            className="w-full space-y-4"
           >
             {leaderboard.map((item, index) => {
               const score = item.score;
@@ -602,17 +602,17 @@ export default function App() {
               const barWidth = Math.min(100, (Math.abs(score) / maxAbsScore) * 100);
               
               const rowBorderAccent = isPositive
-                ? 'border-l-[#10b981]'
+                ? 'hover:border-l-[#10b981]'
                 : isNegative
-                  ? 'border-l-[#f43f5e]'
-                  : 'border-l-slate-500';
+                  ? 'hover:border-l-[#f43f5e]'
+                  : 'hover:border-l-slate-400';
 
               return (
                 <motion.div 
                   key={item.ticker}
                   variants={itemVariants}
                   onClick={() => setSelectedStock(item.ticker)}
-                  className={`flex items-center justify-between px-7 py-5.5 bg-[#0a0a0e]/30 hover:bg-zinc-900/50 hover:backdrop-blur-sm transition-all duration-300 cursor-pointer select-none group border border-premium-border border-l-4 rounded-lg ${rowBorderAccent}`}
+                  className={`flex items-center justify-between px-7 py-5 bg-[#0a0a0e]/30 hover:bg-zinc-900/50 hover:backdrop-blur-sm transition-all duration-300 cursor-pointer select-none group border border-premium-border border-l-3 border-l-transparent rounded-lg ${rowBorderAccent}`}
                 >
                   {/* Left Side: Rank Badge & Symbol */}
                   <div className="flex items-center gap-4">
