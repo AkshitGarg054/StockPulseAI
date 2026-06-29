@@ -339,11 +339,11 @@ export default function App() {
   const drawerIsUp = drawerChange >= 0;
   const drawerNews = headlineLogs.filter(log => log.ticker === selectedStock);
 
-  // AI Sentiment Leaderboard Component (Horizontal strip format)
+  // AI Sentiment Leaderboard Component (Grid format)
   const renderLeaderboard = () => {
     return (
-      <div className="bg-[#131313] p-5 rounded-xl border border-[rgba(255,255,255,0.08)] shadow-lg w-full">
-        <h2 className="text-[17px] font-bold uppercase tracking-[0.01em] text-[#B2B5BE] mb-4 flex items-center gap-2 leading-relaxed">
+      <div className="w-full">
+        <h2 className="text-[17px] font-bold uppercase tracking-[0.01em] text-[#B2B5BE] mb-5 flex items-center gap-2 leading-relaxed">
           <Brain className="text-[#2962ff] w-5 h-5" /> AI Sentiment Leaderboard
         </h2>
 
@@ -352,7 +352,10 @@ export default function App() {
             No sentiment data yet. Submit headlines!
           </div>
         ) : (
-          <div className="flex flex-row gap-4 overflow-x-auto pb-2.5 select-none scrollbar-thin scrollbar-thumb-white/10">
+          <div 
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px 32px' }}
+            className="select-none"
+          >
             {leaderboard.map((item) => {
               const score = item.score;
               const isPositive = score > 0;
@@ -364,7 +367,7 @@ export default function App() {
                 <div 
                   key={item.ticker} 
                   onClick={() => setSelectedStock(item.ticker)}
-                  className="flex-shrink-0 w-[220px] bg-[#161616] px-[18px] py-[16px] rounded-lg border border-[rgba(255,255,255,0.08)] hover:border-slate-500 cursor-pointer flex flex-col justify-between select-none"
+                  className="bg-white/[0.02] border border-white/[0.06] px-[18px] py-[16px] rounded-lg hover:border-slate-500 cursor-pointer flex flex-col justify-between select-none"
                 >
                   {/* Ticker & Company Block */}
                   <div className="flex justify-between items-start leading-relaxed">
@@ -487,7 +490,7 @@ export default function App() {
           <div className="w-full">
             
             {/* 10-Stock WATCHLIST grid taking full width */}
-            <div className="bg-[#131313] p-5 rounded-xl border border-[rgba(255,255,255,0.08)] shadow-lg">
+            <div className="py-6">
               <div className="flex items-center justify-between mb-5">
                 {/* Section title: text-[17px] font-bold leading-relaxed */}
                 <h2 className="text-[17px] font-bold uppercase tracking-[0.01em] text-[#B2B5BE] flex items-center gap-2 leading-relaxed">
@@ -518,7 +521,7 @@ export default function App() {
                     <div 
                       key={ticker} 
                       onClick={() => setSelectedStock(ticker)}
-                      className={`bg-[#161616] p-5 rounded-xl border border-[rgba(255,255,255,0.08)] flex flex-col justify-between cursor-pointer transition-all duration-200 hover:border-slate-500 hover:shadow-[0_1px_2px_rgba(0,0,0,0.4)] ${flashClass}`}
+                      className={`bg-white/[0.02] border border-white/[0.06] p-5 rounded-xl flex flex-col justify-between cursor-pointer transition-all duration-200 hover:border-slate-500 hover:shadow-none ${flashClass}`}
                     >
                       <div className="flex items-start justify-between mb-2">
                         <div className="leading-snug">
@@ -558,13 +561,15 @@ export default function App() {
           /* ================================================================= */
           /* AI NEWS CENTER VIEW (Horizontal Strip & Single-Column Layout)     */
           /* ================================================================= */
-          <div className="space-y-6 max-w-[1600px] mx-auto px-2 md:px-4">
+          <div className="space-y-14 max-w-[1600px] mx-auto px-2 md:px-4">
             
             {/* Horizontal Leaderboard strip at the top */}
-            {renderLeaderboard()}
+            <div className="pt-2">
+              {renderLeaderboard()}
+            </div>
 
             {/* Submission Form */}
-            <div className="bg-[#131313] p-5 rounded-xl border border-[rgba(255,255,255,0.08)] shadow-lg">
+            <div className="pt-10 border-t border-white/[0.08]">
               <h2 className="text-[17px] font-bold uppercase tracking-[0.01em] text-[#B2B5BE] mb-1 flex items-center gap-2 leading-relaxed">
                 <Newspaper className="text-[#2962ff] w-5 h-5" /> Submit Headline for AI Sentiment
               </h2>
@@ -623,8 +628,8 @@ export default function App() {
             </div>
 
             {/* Global submissions feed */}
-            <div className="bg-[#131313] p-5 rounded-xl border border-[rgba(255,255,255,0.08)] shadow-lg">
-              <h2 className="text-[17px] font-bold uppercase tracking-[0.01em] text-[#B2B5BE] mb-4 flex items-center gap-2 leading-relaxed">
+            <div className="pt-10 border-t border-white/[0.08]">
+              <h2 className="text-[17px] font-bold uppercase tracking-[0.01em] text-[#B2B5BE] mb-5 flex items-center gap-2 leading-relaxed">
                 <History className="text-[#2962ff] w-5 h-5" /> Recent Sentiment Analysis Logs
               </h2>
 
@@ -633,7 +638,7 @@ export default function App() {
                   No submissions have been recorded yet.
                 </div>
               ) : (
-                <div className="space-y-3.5 pr-1">
+                <div className="grid grid-cols-1 gap-4 pr-1">
                   {headlineLogs.map((log) => {
                     const isCompleted = log.status === 'completed';
                     const showScore = isCompleted && log.score !== undefined;
@@ -643,7 +648,7 @@ export default function App() {
                     return (
                       <div 
                         key={log.id || log._id} 
-                        className="bg-[#161616] p-5 rounded-xl border border-[rgba(255,255,255,0.08)] hover:border-slate-700 transition-all space-y-2.5"
+                        className="bg-white/[0.02] border border-white/[0.06] p-5 rounded-xl hover:border-slate-500 transition-all space-y-2.5"
                       >
                         <div className="flex justify-between items-center leading-relaxed">
                           <div className="flex items-baseline gap-2">
@@ -686,11 +691,9 @@ export default function App() {
                         </p>
 
                         {isCompleted && log.explanation && (
-                          <div className="bg-black/40 p-3.5 rounded border border-[rgba(255,255,255,0.08)] mt-1.5">
-                            <p className="text-[#B2B5BE] text-[14.4px] leading-[1.45]">
-                              <span className="text-[#2962ff] font-semibold">💡 AI Explanation:</span> {log.explanation}
-                            </p>
-                          </div>
+                          <p className="text-[#B2B5BE] text-[14.4px] leading-[1.45] mt-2">
+                            <span className="text-[#2962ff] font-semibold">💡 AI Explanation:</span> {log.explanation}
+                          </p>
                         )}
                       </div>
                     );
