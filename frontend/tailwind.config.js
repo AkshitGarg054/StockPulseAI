@@ -7,6 +7,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        premium: {
+          bg: 'var(--bg-color)',
+          card: 'var(--card-bg)',
+          border: 'var(--card-border)',
+          accent: 'var(--accent-color)',
+          accentGlow: 'var(--accent-glow)',
+          textMuted: 'var(--text-muted)',
+          textTitle: 'var(--text-title)',
+        },
         brand: {
           bg: '#000000',      // Pure pitch black
           card: '#131313',    // Neutral gray-black
@@ -17,8 +26,8 @@ module.exports = {
         }
       },
       fontFamily: {
-        sans: ['-apple-system', 'Inter', '"Helvetica Neue"', 'Arial', 'sans-serif'],
-        mono: ['-apple-system', 'Inter', '"Helvetica Neue"', 'Arial', 'sans-serif'] // Override to match standard font-family
+        sans: ['Outfit', 'Inter', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
       }
     },
   },
