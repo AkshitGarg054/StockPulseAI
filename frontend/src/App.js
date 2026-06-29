@@ -352,7 +352,7 @@ export default function App() {
             No sentiment data yet. Submit headlines!
           </div>
         ) : (
-          <div className="flex flex-row gap-4 overflow-x-auto pb-2 select-none scrollbar-thin scrollbar-thumb-white/10">
+          <div className="flex flex-row gap-4 overflow-x-auto pb-2.5 select-none scrollbar-thin scrollbar-thumb-white/10">
             {leaderboard.map((item) => {
               const score = item.score;
               const isPositive = score > 0;
@@ -364,45 +364,52 @@ export default function App() {
                 <div 
                   key={item.ticker} 
                   onClick={() => setSelectedStock(item.ticker)}
-                  className="flex-shrink-0 w-[195px] bg-[#161616] p-4 rounded-lg border border-[rgba(255,255,255,0.08)] hover:border-slate-500 cursor-pointer flex flex-col justify-between"
+                  className="flex-shrink-0 w-[220px] bg-[#161616] px-[18px] py-[16px] rounded-lg border border-[rgba(255,255,255,0.08)] hover:border-slate-500 cursor-pointer flex flex-col justify-between select-none"
                 >
-                  <div className="flex justify-between items-start mb-2 leading-relaxed">
+                  {/* Ticker & Company Block */}
+                  <div className="flex justify-between items-start leading-relaxed">
                     <div className="truncate pr-1">
                       <span className="text-[16px] font-bold text-white block leading-none">{item.ticker}</span>
-                      <span className="text-[13.6px] text-[#B2B5BE]/80 truncate block mt-1 leading-none">{companyNames[item.ticker]}</span>
+                      <span className="text-[13.6px] text-[#B2B5BE]/80 truncate block mt-1.5 leading-none">{companyNames[item.ticker]}</span>
                     </div>
-                    
-                    <span className={`px-1.5 py-0.5 rounded text-[13.6px] font-bold ${
-                      isPositive ? 'bg-[#089981]/10 text-[#089981]' :
-                      isNegative ? 'bg-[#F23645]/10 text-[#F23645]' :
-                      'bg-slate-800 text-slate-400'
-                    }`}>
-                      {isPositive ? '+' : ''}{score.toFixed(2)}
-                    </span>
                   </div>
 
-                  {/* Bidirectional progress bar container (height 4px) */}
-                  <div className="h-[4px] w-full bg-[rgba(255,255,255,0.06)] rounded-full overflow-hidden flex relative mt-2.5">
-                    <div className="absolute inset-y-0 left-1/2 w-0.5 bg-[rgba(255,255,255,0.12)] z-10"></div>
-                    
-                    {/* Left (Negative) */}
-                    <div className="w-1/2 flex justify-end">
-                      {isNegative && (
-                        <div 
-                          style={{ width: `${barWidth}%` }} 
-                          className="h-full bg-[#F23645] rounded-l-full"
-                        ></div>
-                      )}
+                  {/* Sentiment Score & Progress Bar Row with 12px gap (mt-3) */}
+                  <div className="space-y-2.5 mt-3">
+                    <div className="flex justify-between items-baseline leading-none">
+                      <span className="text-[11px] text-[#B2B5BE]/70 font-semibold uppercase tracking-wider">Score</span>
+                      <span className={`text-[15.2px] font-bold ${
+                        isPositive ? 'text-[#089981]' :
+                        isNegative ? 'text-[#F23645]' :
+                        'text-slate-400'
+                      }`}>
+                        {isPositive ? '+' : ''}{score.toFixed(2)}
+                      </span>
                     </div>
 
-                    {/* Right (Positive) */}
-                    <div className="w-1/2">
-                      {isPositive && (
-                        <div 
-                          style={{ width: `${barWidth}%` }} 
-                          className="h-full bg-[#089981] rounded-r-full"
-                        ></div>
-                      )}
+                    {/* Thicker 6px progress bar container spanning full width of the chip */}
+                    <div className="h-[6px] w-full bg-[rgba(255,255,255,0.06)] rounded-full overflow-hidden flex relative">
+                      <div className="absolute inset-y-0 left-1/2 w-0.5 bg-[rgba(255,255,255,0.12)] z-10"></div>
+                      
+                      {/* Left (Negative) */}
+                      <div className="w-1/2 flex justify-end">
+                        {isNegative && (
+                          <div 
+                            style={{ width: `${barWidth}%` }} 
+                            className="h-full bg-[#F23645] rounded-l-full"
+                          ></div>
+                        )}
+                      </div>
+
+                      {/* Right (Positive) */}
+                      <div className="w-1/2">
+                        {isPositive && (
+                          <div 
+                            style={{ width: `${barWidth}%` }} 
+                            className="h-full bg-[#089981] rounded-r-full"
+                          ></div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -551,7 +558,7 @@ export default function App() {
           /* ================================================================= */
           /* AI NEWS CENTER VIEW (Horizontal Strip & Single-Column Layout)     */
           /* ================================================================= */
-          <div className="space-y-6 max-w-4xl mx-auto">
+          <div className="space-y-6 max-w-[1600px] mx-auto px-2 md:px-4">
             
             {/* Horizontal Leaderboard strip at the top */}
             {renderLeaderboard()}
