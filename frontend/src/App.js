@@ -629,7 +629,7 @@ export default function App() {
 
                     {/* Middle: Progress Bar with accurate capsule bars & inline percentage indicators */}
                     <div className="hidden md:flex items-center gap-3.5 w-[250px] flex-shrink-0 mx-6">
-                      <span className={`text-[10px] font-black font-mono w-10 text-right ${isPositive ? 'text-[#10b981]' : isNegative ? 'text-[#f43f5e]' : 'text-slate-400'}`}>
+                      <span className={`text-sm font-semibold font-mono tracking-tight w-14 text-right ${isPositive ? 'text-[#10b981]' : isNegative ? 'text-[#f43f5e]' : 'text-slate-400'}`}>
                         {isNegative ? `${barWidth.toFixed(1)}%` : ''}
                       </span>
                       
@@ -657,7 +657,7 @@ export default function App() {
                         </div>
                       </div>
 
-                      <span className={`text-[10px] font-black font-mono w-10 text-left ${isPositive ? 'text-[#10b981]' : isNegative ? 'text-[#f43f5e]' : 'text-slate-400'}`}>
+                      <span className={`text-sm font-semibold font-mono tracking-tight w-14 text-left ${isPositive ? 'text-[#10b981]' : isNegative ? 'text-[#f43f5e]' : 'text-slate-400'}`}>
                         {isPositive ? `${barWidth.toFixed(1)}%` : ''}
                       </span>
                     </div>
@@ -690,8 +690,77 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-premium-bg text-[#eaebed] relative transition-colors duration-400">
+    <div className="min-h-screen bg-premium-bg text-[#eaebed] relative transition-colors duration-400 overflow-hidden">
       
+      {/* Background space comet / star stream */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0 opacity-25">
+        <svg className="w-full h-full" viewBox="0 0 1000 600" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="comet-grad-1" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#3b82f6" stopOpacity="0" />
+              <stop offset="80%" stopColor="#3b82f6" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#60a5fa" stopOpacity="1" />
+            </linearGradient>
+            <linearGradient id="comet-grad-2" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#818cf8" stopOpacity="0" />
+              <stop offset="80%" stopColor="#818cf8" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#a5b4fc" stopOpacity="0.9" />
+            </linearGradient>
+          </defs>
+          <style>{`
+            @keyframes comet-flow-slow {
+              0% { stroke-dashoffset: 1000; }
+              100% { stroke-dashoffset: 0; }
+            }
+            .comet-stream-1 {
+              stroke-dasharray: 150 850;
+              animation: comet-flow-slow 12s linear infinite;
+            }
+            .comet-stream-2 {
+              stroke-dasharray: 100 900;
+              animation: comet-flow-slow 16s linear infinite;
+              animation-delay: -3s;
+            }
+            .comet-stream-3 {
+              stroke-dasharray: 80 920;
+              animation: comet-flow-slow 20s linear infinite;
+              animation-delay: -7s;
+            }
+            @keyframes globe-spin-slow {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+            .globe-container {
+              transform-origin: 500px 300px;
+              animation: globe-spin-slow 180s linear infinite;
+            }
+            @keyframes scanline-sweep {
+              0% { transform: translateY(-70%) rotate(15deg); }
+              100% { transform: translateY(70%) rotate(15deg); }
+            }
+            .scanline-glow {
+              animation: scanline-sweep 12s linear infinite;
+            }
+          `}</style>
+          
+          {/* Central 3D Globe Outline */}
+          <g className="globe-container">
+            <circle cx="500" cy="300" r="110" fill="none" stroke="rgba(255, 255, 255, 0.02)" strokeWidth="1" />
+            <ellipse cx="500" cy="300" rx="110" ry="44" fill="none" stroke="rgba(255, 255, 255, 0.015)" strokeWidth="1" />
+            <ellipse cx="500" cy="300" rx="44" ry="110" fill="none" stroke="rgba(255, 255, 255, 0.015)" strokeWidth="1" />
+            <ellipse cx="500" cy="300" rx="110" ry="80" fill="none" stroke="rgba(255, 255, 255, 0.01)" strokeWidth="1" />
+            <ellipse cx="500" cy="300" rx="80" ry="110" fill="none" stroke="rgba(255, 255, 255, 0.01)" strokeWidth="1" />
+            <line x1="500" y1="190" x2="500" y2="410" stroke="rgba(255, 255, 255, 0.012)" strokeWidth="1" />
+            <line x1="390" y1="300" x2="610" y2="300" stroke="rgba(255, 255, 255, 0.012)" strokeWidth="1" />
+          </g>
+
+          {/* Comet Arc Paths (flowing from center globe to right edge) */}
+          <path d="M 500,300 Q 750,120 1000,220" fill="none" stroke="url(#comet-grad-1)" strokeWidth="1.8" className="comet-stream-1" />
+          <path d="M 500,300 Q 720,260 1000,300" fill="none" stroke="url(#comet-grad-2)" strokeWidth="1.2" className="comet-stream-2" opacity="0.7" />
+          <path d="M 500,300 Q 780,440 1000,360" fill="none" stroke="url(#comet-grad-1)" strokeWidth="1.5" className="comet-stream-3" opacity="0.8" />
+        </svg>
+      </div>
+
       {/* Sticky header and ticker container */}
       <div className="sticky top-0 z-30 w-full bg-[#040406]/85 backdrop-blur-md border-b border-white/10 select-none">
         {/* Top Professional Navigation Bar */}
@@ -783,7 +852,7 @@ export default function App() {
       </div>
 
       {/* Main Container */}
-      <main className="w-full px-4 md:px-8 py-8 max-w-[1680px] mx-auto transition-all animate-fade-in">
+      <main className="relative z-10 w-full px-4 md:px-8 py-8 max-w-[1680px] mx-auto transition-all animate-fade-in">
         {activeTab === 'dashboard' ? (
           /* ================================================================= */
           /* DASHBOARD VIEW                                                    */
@@ -861,11 +930,19 @@ export default function App() {
                     <div 
                       key={t} 
                       onClick={() => setSelectedStock(t)}
-                      className={`p-6 md:p-8 flex flex-col justify-between cursor-pointer transition-colors duration-200 relative select-none hover:bg-white/[0.01] border-b border-premium-border ${
+                      className={`p-6 md:p-8 flex flex-col justify-between cursor-pointer transition-colors duration-200 relative select-none hover:bg-white/[0.01] border-b border-premium-border overflow-hidden ${
                         index % 3 !== 2 ? 'md:border-r border-premium-border' : ''
                       } ${flashClass}`}
                     >
-                      <div>
+                      {/* Subtle animated scanline surface overlay */}
+                      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-30 z-0">
+                        {/* Static isometric fine lines */}
+                        <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,rgba(255,255,255,0.012)_0px,rgba(255,255,255,0.012)_1px,transparent_1px,transparent_6px)]" />
+                        {/* Sweeping reflection scanline */}
+                        <div className="absolute inset-x-0 top-0 h-[220%] bg-gradient-to-b from-transparent via-white/[0.025] to-transparent scanline-glow" />
+                      </div>
+
+                      <div className="relative z-10 w-full flex flex-col justify-between h-full">
                         <div className="flex items-start justify-between">
                           <div>
                             <span className="text-[16px] font-bold text-white tracking-tight">{t}</span>
