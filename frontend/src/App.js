@@ -715,15 +715,14 @@ export default function App() {
             {/* Logo */}
             <div className="flex items-center gap-2.5">
               <svg 
-                className="w-6 h-6" 
+                className="w-6 h-6 text-white" 
                 viewBox="0 0 24 24" 
                 fill="none" 
-                stroke="#00e5ff" 
+                stroke="currentColor" 
                 strokeWidth="2.5"
-                style={{ filter: 'drop-shadow(0 0 6px rgba(0, 229, 255, 0.65))' }}
               >
                 <path d="M3 17l6-6 4 4 8-8" strokeLinecap="round" strokeLinejoin="round"/>
-                <circle cx="21" cy="7" r="1.5" fill="#00e5ff"/>
+                <circle cx="21" cy="7" r="1.5" fill="currentColor"/>
               </svg>
               <span className="font-extrabold text-[19px] text-white tracking-tight block">StockPulse AI</span>
             </div>
