@@ -204,6 +204,20 @@ function TechnicalGauge({ score }) {
   );
 }
 
+// Material Design Step-Style Leaderboard Podium Icon Component (MdLeaderboard)
+function LeaderboardIcon({ className }) {
+  return (
+    <svg 
+      className={className} 
+      viewBox="0 0 24 24" 
+      fill="currentColor" 
+      aria-hidden="true"
+    >
+      <path d="M7.5 21H2V9h5.5v12zm7.25-18h-5.5v18h5.5V3zM22 11h-5.5v10H22V11z"/>
+    </svg>
+  );
+}
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [selectedStock, setSelectedStock] = useState(null);
@@ -213,6 +227,7 @@ export default function App() {
   const [showAllDrawerNews, setShowAllDrawerNews] = useState(false);
   
   // Active Theme Manager State ('onyx', 'nebula', 'emerald')
+  // eslint-disable-next-line no-unused-vars
   const [theme, setTheme] = useState('onyx');
 
   const [stocks, setStocks] = useState({});
@@ -577,7 +592,7 @@ export default function App() {
       <div className="w-full border-b border-premium-border pb-8">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-[18px] font-extrabold uppercase tracking-wide text-premium-textTitle flex items-center gap-2.5">
-            <Brain className="text-premium-accent w-5.5 h-5.5 animate-pulse" /> AI Sentiment Leaderboard
+            <LeaderboardIcon className="text-premium-accent w-5.5 h-5.5" /> AI Sentiment Leaderboard
           </h2>
           <span className="text-[11px] font-bold text-premium-textMuted uppercase tracking-wider bg-white/5 px-2.5 py-1 rounded-md">
             7-Day Decayed
@@ -738,29 +753,6 @@ export default function App() {
 
           {/* Right side controls: Theme Manager + Connection Badges */}
           <div className="flex items-center gap-6 md:gap-8">
-            
-            {/* Theme Customizer Pill Selector */}
-            <div className="hidden sm:flex items-center bg-white/5 p-1 rounded-full border border-white/[0.05] text-[11px] font-bold">
-              <button 
-                onClick={() => setTheme('onyx')}
-                className={`px-3 py-1.5 rounded-full transition-all ${theme === 'onyx' ? 'bg-white/10 text-white shadow-sm' : 'text-premium-textMuted hover:text-white'}`}
-              >
-                Onyx
-              </button>
-              <button 
-                onClick={() => setTheme('nebula')}
-                className={`px-3 py-1.5 rounded-full transition-all ${theme === 'nebula' ? 'bg-[#4f46e5]/20 text-[#a5b4fc] shadow-sm' : 'text-premium-textMuted hover:text-white'}`}
-              >
-                Nebula
-              </button>
-              <button 
-                onClick={() => setTheme('emerald')}
-                className={`px-3 py-1.5 rounded-full transition-all ${theme === 'emerald' ? 'bg-[#10b981]/20 text-[#a7f3d0] shadow-sm' : 'text-premium-textMuted hover:text-white'}`}
-              >
-                Emerald
-              </button>
-            </div>
-
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1.5 px-[10px] py-[4px] rounded-full bg-white/5 text-[11.5px] font-bold text-premium-textMuted border border-white/[0.02]" title={socketConnected ? "Connection is live" : "Connection offline"}>
                 <span className={`w-1.5 h-1.5 rounded-full ${socketConnected ? 'bg-[#10b981] animate-pulse shadow-[0_0_8px_#10b981]' : 'bg-[#f43f5e]'}`}></span>
@@ -954,7 +946,7 @@ export default function App() {
                         </>
                       ) : (
                         <>
-                          <Brain className="w-4 h-4" />
+                          <LeaderboardIcon className="w-4 h-4" />
                           Evaluate Sentiment
                         </>
                       )}
