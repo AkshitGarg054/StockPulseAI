@@ -66,6 +66,7 @@ function Sparkline({ history, isUp }) {
         strokeLinecap="round"
         strokeLinejoin="round"
         points={points}
+        style={{ filter: isUp ? 'drop-shadow(0 0 3px rgba(16, 185, 129, 0.6))' : 'drop-shadow(0 0 3px rgba(244, 63, 94, 0.6))' }}
       />
     </svg>
   );
@@ -234,7 +235,6 @@ export default function App() {
   const [priceHistory, setPriceHistory] = useState({
     AAPL: [], TSLA: [], GOOGL: [], AMZN: [], MSFT: [], NVDA: [], META: [], NFLX: [], AMD: [], COIN: []
   });
-  // eslint-disable-next-line no-unused-vars
   const [flashStates, setFlashStates] = useState({});
   const [leaderboard, setLeaderboard] = useState([]);
   
@@ -715,16 +715,23 @@ export default function App() {
             {/* Logo */}
             <div className="flex items-center gap-2.5">
               <svg 
-                className="w-6 h-6 text-white" 
+                className="w-6 h-6" 
                 viewBox="0 0 24 24" 
                 fill="none" 
-                stroke="currentColor" 
+                stroke="url(#logo-silver-metallic)" 
                 strokeWidth="2.5"
+                style={{ filter: 'drop-shadow(0px 0px 3px rgba(255, 255, 255, 0.15))', color: '#FFFFFF' }}
               >
+                <defs>
+                  <linearGradient id="logo-silver-metallic" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#FFFFFF" />
+                    <stop offset="100%" stopColor="#D1D5DB" />
+                  </linearGradient>
+                </defs>
                 <path d="M3 17l6-6 4 4 8-8" strokeLinecap="round" strokeLinejoin="round"/>
-                <circle cx="21" cy="7" r="1.5" fill="currentColor"/>
+                <circle cx="21" cy="7" r="1.5" fill="url(#logo-silver-metallic)"/>
               </svg>
-              <span className="font-extrabold text-[19px] text-white tracking-tight block">StockPulse AI</span>
+              <span style={{ display: 'inline-block', fontWeight: '900', fontSize: '1.65rem', color: '#F8FAFC' }}>StockPulse AI</span>
             </div>
             
             {/* Nav Tabs */}
@@ -836,7 +843,10 @@ export default function App() {
                   const change = price - firstPrice;
                   const percentChange = firstPrice !== 0 ? ((change / firstPrice) * 100).toFixed(2) : '0.00';
                   const isUp = change >= 0;
-                  
+                  const flash = flashStates[t];
+                  const flashClass = flash && (Date.now() - flash.timestamp < 1200)
+                    ? (flash.direction === 'up' ? 'animate-flash-up' : 'animate-flash-down')
+                    : '';
 
                   return (
                     <div 
@@ -844,7 +854,7 @@ export default function App() {
                       onClick={() => setSelectedStock(t)}
                       className={`p-6 md:p-8 flex flex-col justify-between cursor-pointer transition-colors duration-200 relative select-none hover:bg-white/[0.01] border-b border-premium-border overflow-hidden ${
                         index % 3 !== 2 ? 'md:border-r border-premium-border' : ''
-                      }`}
+                      } ${flashClass}`}
                     >
 
 
@@ -855,10 +865,10 @@ export default function App() {
                             <span className="text-[11.5px] text-premium-textMuted font-medium block mt-0.5">{companyNames[t] || 'Asset'}</span>
                           </div>
                           
-                          <div className={`flex items-center gap-0.5 px-1.5 py-0.5 rounded-sm text-[10.5px] font-extrabold ${
+                          <div className={`flex items-center gap-0.5 px-1.5 py-0.5 rounded-sm text-[10.5px] font-extrabold border ${
                             isUp 
-                              ? 'bg-[#10b981]/10 text-[#10b981]' 
-                              : 'bg-[#f43f5e]/10 text-[#f43f5e]'
+                              ? 'bg-[#10b981]/15 text-[#10b981] border-[#10b981]/30 shadow-[0_0_8px_rgba(16,185,129,0.25)]' 
+                              : 'bg-[#f43f5e]/15 text-[#f43f5e] border-[#f43f5e]/30 shadow-[0_0_8px_rgba(244,63,94,0.25)]'
                           }`}>
                             {isUp ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
                             <span>{isUp ? '+' : ''}{percentChange}%</span>

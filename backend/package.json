@@ -2,12 +2,8 @@
   "name": "backend",
   "version": "1.0.0",
   "type": "module",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "seed": "node seedHeadlines.js",
-    "dev": "nodemon src/index.js",
-    "worker": "node worker.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
