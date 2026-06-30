@@ -184,7 +184,7 @@ function TechnicalGauge({ score }) {
           className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 h-16 origin-bottom transition-transform duration-1000 ease-out flex flex-col items-center justify-end"
         >
           {/* Pointer indicator */}
-          <div className="w-1 h-14 bg-white rounded-full shadow-[0_0_8px_rgba(255,255,255,0.75)]"></div>
+          <div className="w-1 h-14 bg-white rounded-full"></div>
           {/* Hub center circle */}
           <div className="w-4 h-4 bg-white rounded-full -mb-2 border border-zinc-950 z-10 shadow-md"></div>
         </div>
@@ -550,27 +550,27 @@ export default function App() {
     const getRankBadge = (index) => {
       if (index === 0) {
         return (
-          <div className="w-7 h-7 rounded-md bg-transparent border-2 border-amber-500 text-amber-400 font-black text-[11px] flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.5)]">
+          <div className="w-7 h-7 rounded-md bg-transparent border-2 border-amber-500 text-amber-400 font-black text-[11px] flex items-center justify-center">
             1st
           </div>
         );
       }
       if (index === 1) {
         return (
-          <div className="w-7 h-7 rounded-md bg-transparent border-2 border-slate-300 text-slate-200 font-black text-[11px] flex items-center justify-center shadow-[0_0_15px_rgba(203,213,225,0.4)]">
+          <div className="w-7 h-7 rounded-md bg-transparent border-2 border-slate-300 text-slate-200 font-black text-[11px] flex items-center justify-center">
             2nd
           </div>
         );
       }
       if (index === 2) {
         return (
-          <div className="w-7 h-7 rounded-md bg-transparent border-2 border-orange-500 text-orange-400 font-black text-[11px] flex items-center justify-center shadow-[0_0_15px_rgba(249,115,22,0.4)]">
+          <div className="w-7 h-7 rounded-md bg-transparent border-2 border-orange-500 text-orange-400 font-black text-[11px] flex items-center justify-center">
             3rd
           </div>
         );
       }
       return (
-        <div className="w-7 h-7 rounded-md bg-transparent border border-premium-accent/50 text-premium-accent font-bold text-[11px] flex items-center justify-center shadow-[0_0_10px_rgba(99,102,241,0.3)]">
+        <div className="w-7 h-7 rounded-md bg-transparent border border-premium-accent/50 text-premium-accent font-bold text-[11px] flex items-center justify-center">
           {index + 1}
         </div>
       );
@@ -654,7 +654,7 @@ export default function App() {
                           {isNegative && (
                             <div 
                               style={{ width: `${barWidth}%` }} 
-                              className="h-full bg-gradient-to-l from-[#f43f5e] to-[#ef4444] rounded-l-full shadow-[0_0_8px_#f43f5e]"
+                              className="h-full bg-gradient-to-l from-[#f43f5e] to-[#ef4444] rounded-l-full"
                             ></div>
                           )}
                         </div>
@@ -664,7 +664,7 @@ export default function App() {
                           {isPositive && (
                             <div 
                               style={{ width: `${barWidth}%` }} 
-                              className="h-full bg-gradient-to-r from-[#10b981] to-[#059669] rounded-r-full shadow-[0_0_8px_#10b981]"
+                              className="h-full bg-gradient-to-r from-[#10b981] to-[#059669] rounded-r-full"
                             ></div>
                           )}
                         </div>
@@ -677,7 +677,7 @@ export default function App() {
 
                     {/* Right Side: Score & Label */}
                     <div className="col-span-5 md:col-span-3 flex items-center justify-end gap-6 justify-self-end">
-                      <span className={`text-[11px] px-2 py-0.5 rounded font-extrabold uppercase tracking-wider shadow-[0_0_8px_rgba(255,255,255,0.02)] ${
+                      <span className={`text-[11px] px-2 py-0.5 rounded font-extrabold uppercase tracking-wider ${
                         isPositive ? 'bg-[#10b981]/15 text-[#10b981]' :
                         isNegative ? 'bg-[#f43f5e]/15 text-[#f43f5e]' :
                         'bg-white/10 text-slate-400'
@@ -733,7 +733,7 @@ export default function App() {
                 onClick={() => { setActiveTab('dashboard'); setSelectedStock(null); }}
                 className={`pb-1 transition-all duration-200 border-b-2 hover:text-white ${
                   activeTab === 'dashboard' 
-                    ? 'text-white border-premium-accent shadow-[0_12px_12px_-5px_var(--accent-color)]' 
+                    ? 'text-white border-premium-accent' 
                     : 'text-premium-textMuted border-transparent'
                 }`}
               >
@@ -743,7 +743,7 @@ export default function App() {
                 onClick={() => { setActiveTab('news'); setSelectedStock(null); }}
                 className={`pb-1 transition-all duration-200 border-b-2 hover:text-white ${
                   activeTab === 'news' 
-                    ? 'text-white border-premium-accent shadow-[0_12px_12px_-5px_var(--accent-color)]' 
+                    ? 'text-white border-premium-accent' 
                     : 'text-premium-textMuted border-transparent'
                 }`}
               >
@@ -756,7 +756,7 @@ export default function App() {
           <div className="flex items-center gap-6 md:gap-8">
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1.5 px-[10px] py-[4px] rounded-full bg-white/5 text-[11.5px] font-bold text-premium-textMuted border border-white/[0.02]" title={socketConnected ? "Connection is live" : "Connection offline"}>
-                <span className={`w-1.5 h-1.5 rounded-full ${socketConnected ? 'bg-[#10b981] animate-pulse shadow-[0_0_8px_#10b981]' : 'bg-[#f43f5e]'}`}></span>
+                <span className={`w-1.5 h-1.5 rounded-full ${socketConnected ? 'bg-[#10b981] animate-pulse' : 'bg-[#f43f5e]'}`}></span>
                 <span>LIVE</span>
               </div>
             </div>
@@ -822,7 +822,7 @@ export default function App() {
                 </h2>
                 
                 <div className="flex items-center gap-1.5 text-[10.5px] font-bold text-[#10b981] tracking-wider">
-                  <span className="w-1.5 h-1.5 bg-[#10b981] rounded-full animate-pulse shadow-[0_0_6px_#10b981]"></span>
+                  <span className="w-1.5 h-1.5 bg-[#10b981] rounded-full animate-pulse"></span>
                   <span>LIVE STREAMING</span>
                 </div>
               </div>
