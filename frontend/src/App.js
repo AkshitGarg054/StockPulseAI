@@ -549,27 +549,27 @@ export default function App() {
     const getRankBadge = (index) => {
       if (index === 0) {
         return (
-          <div className="w-7 h-7 rounded bg-amber-500/20 border border-amber-500/40 text-amber-400 font-black text-[11px] flex items-center justify-center shadow-[0_0_10px_rgba(245,158,11,0.25)]">
+          <div className="w-7 h-7 rounded-md bg-transparent border-2 border-amber-500 text-amber-400 font-black text-[11px] flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.5)]">
             1st
           </div>
         );
       }
       if (index === 1) {
         return (
-          <div className="w-7 h-7 rounded bg-slate-300/20 border border-slate-300/40 text-[#cbd5e1] font-black text-[11px] flex items-center justify-center shadow-[0_0_10px_rgba(203,213,225,0.2)]">
+          <div className="w-7 h-7 rounded-md bg-transparent border-2 border-slate-300 text-slate-200 font-black text-[11px] flex items-center justify-center shadow-[0_0_15px_rgba(203,213,225,0.4)]">
             2nd
           </div>
         );
       }
       if (index === 2) {
         return (
-          <div className="w-7 h-7 rounded bg-[#b45309]/20 border border-[#b45309]/40 text-[#f97316] font-black text-[11px] flex items-center justify-center shadow-[0_0_10px_rgba(180,83,9,0.2)]">
+          <div className="w-7 h-7 rounded-md bg-transparent border-2 border-orange-500 text-orange-400 font-black text-[11px] flex items-center justify-center shadow-[0_0_15px_rgba(249,115,22,0.4)]">
             3rd
           </div>
         );
       }
       return (
-        <div className="w-7 h-7 rounded bg-white/5 border border-white/10 text-premium-textMuted font-bold text-[11px] flex items-center justify-center">
+        <div className="w-7 h-7 rounded-md bg-transparent border border-premium-accent/50 text-premium-accent font-bold text-[11px] flex items-center justify-center shadow-[0_0_10px_rgba(99,102,241,0.3)]">
           {index + 1}
         </div>
       );
@@ -645,10 +645,6 @@ export default function App() {
 
                     {/* Middle: Progress Bar with accurate capsule bars & inline percentage indicators */}
                     <div className="hidden md:flex col-span-4 items-center gap-3.5 w-full mx-0">
-                      <span className={`text-sm font-bold font-mono tracking-tight w-14 text-right ${isPositive ? 'text-[#10b981]' : isNegative ? 'text-[#f43f5e]' : 'text-slate-400'}`}>
-                        {isNegative ? `${barWidth.toFixed(1)}%` : ''}
-                      </span>
-                      
                       <div className="h-2 w-full bg-zinc-800 rounded-full overflow-hidden flex relative border border-white/[0.01]">
                         <div className="absolute inset-y-0 left-1/2 w-[1.5px] bg-[#1a1a24] z-10"></div>
                         
@@ -674,7 +670,7 @@ export default function App() {
                       </div>
 
                       <span className={`text-sm font-bold font-mono tracking-tight w-14 text-left ${isPositive ? 'text-[#10b981]' : isNegative ? 'text-[#f43f5e]' : 'text-slate-400'}`}>
-                        {isPositive ? `${barWidth.toFixed(1)}%` : ''}
+                        {barWidth.toFixed(1)}%
                       </span>
                     </div>
 
