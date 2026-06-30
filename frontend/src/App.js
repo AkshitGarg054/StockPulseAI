@@ -235,6 +235,7 @@ export default function App() {
   
   // Connections Health Check
   const [socketConnected, setSocketConnected] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [dbHealth, setDbHealth] = useState({ api: 'checking', redis: 'checking', mongo: 'checking' });
 
   // Reset drawer truncation state when selected stock changes
@@ -707,10 +708,7 @@ export default function App() {
                   <circle cx="21" cy="7" r="1.5" fill="currentColor"/>
                 </svg>
               </div>
-              <div>
-                <span className="font-extrabold text-[19px] text-white tracking-tight leading-none block">StockPulse AI</span>
-                <span className="text-[10px] text-premium-accent font-extrabold tracking-widest uppercase block mt-0.5">Analyst Desk</span>
-              </div>
+              <span className="font-extrabold text-[19px] text-white tracking-tight block">StockPulse AI</span>
             </div>
             
             {/* Nav Tabs */}
@@ -767,14 +765,6 @@ export default function App() {
               <div className="flex items-center gap-1.5 px-[10px] py-[4px] rounded-full bg-white/5 text-[11.5px] font-bold text-premium-textMuted border border-white/[0.02]" title={socketConnected ? "Connection is live" : "Connection offline"}>
                 <span className={`w-1.5 h-1.5 rounded-full ${socketConnected ? 'bg-[#10b981] animate-pulse shadow-[0_0_8px_#10b981]' : 'bg-[#f43f5e]'}`}></span>
                 <span>LIVE</span>
-              </div>
-
-              <div className="flex items-center gap-1.5 px-[10px] py-[4px] rounded-full bg-white/5 text-[11.5px] font-bold text-premium-textMuted border border-white/[0.02]" title={dbHealth.api === 'healthy' && dbHealth.redis === 'healthy' && dbHealth.mongo === 'healthy' ? "All backend systems fully operational" : "Backend systems degradation detected"}>
-                <span className={`w-1.5 h-1.5 rounded-full ${
-                  dbHealth.api === 'healthy' && dbHealth.redis === 'healthy' && dbHealth.mongo === 'healthy'
-                    ? 'bg-[#10b981]' : 'bg-[#f43f5e]'
-                }`}></span>
-                <span className="hidden md:inline">SYSTEMS OPERATIONAL</span>
               </div>
             </div>
           </div>
