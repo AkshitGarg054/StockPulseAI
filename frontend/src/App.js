@@ -917,12 +917,12 @@ export default function App() {
                     {/* Ticker Selector */}
                     <div className="relative md:w-56 flex-shrink-0">
                       <select 
-                        className="w-full bg-white/[0.02] border border-premium-border text-[#eaebed] px-4 py-3.5 rounded-lg focus:outline-none focus:border-premium-accent text-sm font-semibold appearance-none cursor-pointer hover:bg-white/[0.04] transition-colors"
+                        className="w-full bg-zinc-900 border border-premium-border text-white px-4 py-3.5 rounded-lg focus:outline-none focus:border-premium-accent text-sm font-semibold appearance-none cursor-pointer hover:bg-zinc-800 transition-colors"
                         value={ticker} 
                         onChange={e => setTicker(e.target.value)}
                       >
                         {Object.keys(companyNames).map(t => (
-                          <option key={t} value={t}>{t} - {companyNames[t]}</option>
+                          <option key={t} value={t} className="bg-zinc-900 text-white">{t} - {companyNames[t]}</option>
                         ))}
                       </select>
                       <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-premium-textMuted">
